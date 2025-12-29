@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MA+RA</title>
+
+
+  <style>
+    :root {
+      --yellow: #FFD400;
+      --black: #000000;
+      --white: #ffffff;
+      --red: #E10600;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+
+    body {
+      margin: 0;
+      background: var(--white);
+      color: var(--black);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+
+    header {
+      width: 100%;
+      background: var(--yellow);
+      padding: 20px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+
+    header span {
+      color: var(--red);
+    }
+
+
+    main {
+      width: 100%;
+      max-width: 600px;
+      padding: 20px;
+      text-align: center;
+    }
+
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+
+    button {
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border: 2px solid var(--black);
+      background: var(--white);
+      cursor: pointer;
+    }
+
+
+    button:hover {
+      background: var(--yellow);
+    }
+
+
+    .card {
+      background: var(--yellow);
+      border: 3px solid var(--black);
+      padding: 30px 20px;
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+
+    .next {
+      background: var(--black);
+      color: var(--white);
+      border: none;
+    }
+
+
+    .next:hover {
+      background: var(--red);
+      color: var(--white);
+    }
+
+
+    footer {
+      margin-top: auto;
+      padding: 10px;
+      font-size: 12px;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+
+
+<body>
+
+
+  <header>
+    MA<span>+</span>RA
+  </header>
+
+
+  <main>
+    <div class="buttons">
+      <button onclick="setCategory('predjedlo')">Predjedlo</button>
+      <button onclick="setCategory('specialita')">Špecialita</button>
+      <button onclick="setCategory('hlavny')">Hlavný chod</button>
+      <button onclick="setCategory('dezert')" style="color: var(--red);">Dezert</button>
+    </div>
+
+
+    <div class="card" id="card">
+      Vyber chod a začni hrať.
+    </div>
+
+
+    <button class="next" onclick="nextCard()">ĎALŠIA KARTA</button>
+  </main>
+
+
+  <footer>
+    © MA+RA
+  </footer>
+
+
+  <script>
+    const cards = {
+      predjedlo: [
+        "Čo o tebe ľudia často predpokladajú, ale nie je to pravda?",
+        "Ktorý moment z posledného roka ťa najviac zmenil?",
+        "Aká vlastnosť ti na sebe kedysi prekážala, ale dnes ju berieš ako výhodu?",
+        "Kedy si sa naposledy cítil/a fakt spokojne?",
+        "Čo ťa dokáže okamžite rozosmiať?",
+        "Aký máš vzťah k samote?",
+        "Čo je pre teba momentálne v živote najdôležitejšie?"
+      ],
+      specialita: [
+        "Čo ťa na ľuďoch priťahuje skôr než vzhľad?",
+        "Aký typ večera je pre teba ideálny?",
+        "Čo by si si nikdy nedal/a na seba – a prečo?",
+        "Ktorý názor máš silnejší než väčšina ľudí?",
+        "Aký je tvoj comfort food?",
+        "Čo si na sebe vážiš viac než iní?",
+        "Čo ti vie zlepšiť deň za 5 minút?"
+      ],
+      hlavny: [
+        "Čo je pre teba vo vzťahu absolútna hranica?",
+        "Ako vyzerá pre teba zdravý konflikt?",
+        "Čo potrebuješ od partnera, keď ti nie je dobre?",
+        "Akú chybu robíš vo vzťahoch opakovane?",
+        "Čo by si sa chcel/a ešte naučiť o sebe?",
+        "Kedy by si zo vzťahu odišiel/a bez váhania?",
+        "Čo je pre teba dôkazom rešpektu?"
+      ],
+      dezert: [
+        "Aký kompliment ťa vie dostať najviac?",
+        "Povedz jednu vec, ktorú by si chcel/a, aby o tebe ľudia vedeli.",
+        "Pozri niekomu do očí a povedz jednu úprimnú vetu.",
+        "Čo je tvoja najväčšia slabosť v príťažlivosti?",
+        "Aký dotyk máš najradšej?",
+        "Povedz nahlas, čo ťa dnes na niekom zaujalo.",
+        "Čo by si si dovolil/a, keby si sa nebál/a odmietnutia?"
+      ]
+    };
+
+
+    let currentCategory = null;
+
+
+    function setCategory(category) {
+      currentCategory = category;
+      nextCard();
+    }
+
+
+    function nextCard() {
+      if (!currentCategory) {
+        document.getElementById("card").innerText = "Najprv vyber chod.";
+        return;
+      }
+      const list = cards[currentCategory];
+      const random = Math.floor(Math.random() * list.length);
+      document.getElementById("card").innerText = list[random];
+    }
+  </script>
+
+
+</body>
+</html>
